@@ -126,23 +126,15 @@
             </build>
             <distributionManagement>
                 <snapshotRepository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+                    <id>sumo-snapshots</id>
+                    <name>Sumo Snapshots</name>
+                    <url>https://sumologicusw1.jfrog.io/sumologicusw1/libs-snapshot-local/</url>
                 </snapshotRepository>
                 <repository>
-                    <id>ossrh</id>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-		<snapshotRepository>
-		  <id>sumo-snapshots</id>
-		  <name>Sumo Snapshots</name>
-		  <url>https://sumologicusw1.artifactoryonline.com/sumologicusw1/libs-snapshot-local/</url>
-		</snapshotRepository>
-		<repository>
-		  <id>sumo-releases</id>
-		  <name>Sumo Releases</name>
-		  <url>https://sumologicusw1.artifactoryonline.com/sumologicusw1/libs-release-local/</url>
-		</repository>
+                    <id>sumo-releases</id>
+                    <name>Sumo Releases</name>
+                    <url>https://sumologicusw1.jfrog.io/sumologicusw1/libs-release-local/</url>
+                </repository>
             </distributionManagement>
         </profile>
     </profiles>
