@@ -38,6 +38,13 @@
                 <role>Contributor</role>
             </roles>
         </developer>
+        <developer>
+            <name>Himanshu Shekhar</name>
+            <email>hshekhar@sumologic.com</email>
+            <roles>
+                <role>Contributor</role>
+            </roles>
+        </developer>
     </developers>
 
     <scm>
@@ -48,7 +55,7 @@
 
     <groupId>nu.redpois0n</groupId>
     <artifactId>oslib</artifactId>
-    <version>1.0</version>
+    <version>1.0-sumo-1</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -125,7 +132,17 @@
                 <repository>
                     <id>ossrh</id>
                     <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
+		</repository>
+		<snapshotRepository>
+		  <id>sumo-snapshots</id>
+		  <name>Sumo Snapshots</name>
+		  <url>https://sumologicusw1.artifactoryonline.com/sumologicusw1/libs-snapshot-local/</url>
+		</snapshotRepository>
+		<repository>
+		  <id>sumo-releases</id>
+		  <name>Sumo Releases</name>
+		  <url>https://sumologicusw1.artifactoryonline.com/sumologicusw1/libs-release-local/</url>
+		</repository>
             </distributionManagement>
         </profile>
     </profiles>
