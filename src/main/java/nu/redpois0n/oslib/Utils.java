@@ -11,60 +11,69 @@ import java.util.Map;
 
 public class Utils {
 
-    public static List<String> readProcess(String[] args) throws Exception {
-        List<String> raw = new ArrayList<>();
-
-        Process p = Runtime.getRuntime().exec(args);
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-            line = line.trim();
-            if (line.length() > 0) {
-                raw.add(line);
-            }
-        }
-
-        reader.close();
-
-        return raw;
-    }
-
-    public static Map<String, String> mapFile(File file, String delimiter) throws Exception {
-        Map<String, String> map = new HashMap<>();
-
-        List<String> lines = readFile(file);
-
-        for (String line : lines) {
-            line = line.trim();
-            if (line.length() > 0) {
-                String[] split = line.split(delimiter);
-                String key = split[0].trim();
-                String value = split[1].trim();
-                map.put(key, value);
-            }
-        }
-
-        return map;
-    }
-
-    public static List<String> readFile(File file) throws Exception {
-        List<String> list = new ArrayList<>();
-
-        if (file.exists()) {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-
+    public static List<String> readProcess(String[] args) {
+        try {
+            List<String> raw = new ArrayList<>();
+            Process p = Runtime.getRuntime().exec(args);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line;
 
             while ((line = reader.readLine()) != null) {
-                list.add(line);
+                line = line.trim();
+                if (!line.isEmpty()) {
+                    raw.add(line);
+                }
             }
-
             reader.close();
+            return raw;
+        } catch (Exception exc) {
+            System.out.println("oslib (Utils.readProcess): " + exc.getMessage());
+            return null;
         }
+    }
 
-        return list;
+    public static Map<String, String> mapFile(File file, String delimiter) {
+        try {
+            Map<String, String> map = new HashMap<>();
+
+            List<String> lines = readFile(file);
+
+            for (String line : lines) {
+                line = line.trim();
+                if (!line.isEmpty()) {
+                    String[] split = line.split(delimiter);
+                    String key = split[0].trim();
+                    String value = split[1].trim();
+                    map.put(key, value);
+                }
+            }
+            return map;
+        } catch (Exception exc) {
+            System.out.println("oslib (Utils.mapFile): " + exc.getMessage());
+            return null;
+        }
+    }
+
+    public static List<String> readFile(File file) {
+        try {
+            List<String> list = new ArrayList<>();
+            if (file.exists()) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    line = line.trim();
+                    if (!line.isEmpty()) {
+                        list.add(line);
+                    }
+                }
+                reader.close();
+            }
+            return list;
+        } catch (Exception exc) {
+            System.out.println("oslib (Utils.readFile): " + exc.getMessage());
+            return null;
+        }
     }
 
     /**
@@ -79,7 +88,7 @@ public class Utils {
             uname = reader.readLine();
             reader.close();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("(oslib.Utils.getUname) > " + ex.getMessage());
         }
 
         return uname;
