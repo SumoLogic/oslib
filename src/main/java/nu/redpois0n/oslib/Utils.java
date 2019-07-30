@@ -20,7 +20,10 @@ public class Utils {
         String line;
 
         while ((line = reader.readLine()) != null) {
-            raw.add(line);
+            line = line.trim();
+            if (line.length() > 0) {
+                raw.add(line);
+            }
         }
 
         reader.close();
@@ -34,10 +37,13 @@ public class Utils {
         List<String> lines = readFile(file);
 
         for (String line : lines) {
-            String[] split = line.split(delimiter);
-            String key = split[0].trim();
-            String value = split[1].trim();
-            map.put(key, value);
+            line = line.trim();
+            if (line.length() > 0) {
+                String[] split = line.split(delimiter);
+                String key = split[0].trim();
+                String value = split[1].trim();
+                map.put(key, value);
+            }
         }
 
         return map;
