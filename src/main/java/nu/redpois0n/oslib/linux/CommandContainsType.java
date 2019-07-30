@@ -18,14 +18,13 @@ public class CommandContainsType extends SearchType {
     public boolean detect() {
         try {
             List<String> raw = Utils.readProcess(cmd);
-
             for (String line : raw) {
                 if (line.toLowerCase().contains(needle.toLowerCase())) {
                     return true;
                 }
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("(oslib.linux.CommandContainsType) cmd=" + String.join(" ", cmd) + " > " + ex.getMessage());
         }
 
         return false;

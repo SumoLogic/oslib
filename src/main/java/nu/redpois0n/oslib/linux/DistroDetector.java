@@ -17,41 +17,21 @@ public class DistroDetector {
 
             boolean lsbReleaseExists = false;
 
-            List<String> lsbRelease = null;
-
-            try {
-                lsbRelease = Utils.readProcess(new String[]{"lsb_release", "-irc"});
+            List<String> lsbRelease = Utils.readProcess(new String[]{"lsb_release", "-irc"});
+            if (lsbRelease != null) {
                 lsbReleaseExists = lsbRelease.size() == 3;
-            } catch (Exception ex) {
-                System.out.println("Failed to execute lsb_release -irc");
             }
 
-            Map<String, String> osreleaseMap = null;
-            Map<String, String> lsbreleaseMap = null;
-
-            try {
-                osreleaseMap = Utils.mapFile(new File("/etc/os-release"), "=");
-            } catch (Exception e) {
-                System.out.println("Failed to load /etc/os-release");
-            }
-
-            try {
-                lsbreleaseMap = Utils.mapFile(new File("/etc/lsb-release"), "=");
-            } catch (Exception ex) {
-                System.out.println("Failed to load /etc/lsb-release");
-            }
+            Map<String, String> osreleaseMap = Utils.mapFile(new File("/etc/os-release"), "=");
+            Map<String, String> lsbreleaseMap = Utils.mapFile(new File("/etc/lsb-release"), "=");
 
             // to detect older versions of centos (as centos 6), which don't have /etc/os-release
             // CentOS Linux 6.10 (Final)
-            try {
-                List<String> lines = Utils.readFile(new File("/etc/centos-release"));
-                if (lines.size() > 0) {
-                    String content = lines.get(0);
-                    distro = Distro.CENTOS;
-                    release = content.split(" ")[2];
-                }
-            } catch (Exception ex) {
-                System.out.println("Failed to load /etc/centos-release");
+            List<String> lines = Utils.readFile(new File("/etc/centos-release"));
+            if (lines != null && lines.size() > 0) {
+                String content = lines.get(0);
+                distro = Distro.CENTOS;
+                release = content.split(" ")[2];
             }
 
             boolean b = false;
@@ -179,7 +159,7 @@ public class DistroDetector {
                         List<String> nixVersion = Utils.readProcess(new String[]{"nixos-version"});
                         release = nixVersion.get(0);
                     } catch (Exception ex) {
-                        ex.printStackTrace();
+                        System.out.println("(oslib.linux.DistroDetector) checking NixOS > " + ex.getMessage());
                     }
                 }
 

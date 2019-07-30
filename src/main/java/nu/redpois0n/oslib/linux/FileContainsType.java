@@ -36,7 +36,7 @@ public class FileContainsType extends SearchType {
 
                 reader.close();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                System.out.println("(oslib.linux.FileContainsType) cmd=" + file.toString() + " > " + ex.getMessage());
             }
         }
 

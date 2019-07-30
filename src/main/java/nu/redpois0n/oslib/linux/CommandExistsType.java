@@ -17,7 +17,7 @@ public class CommandExistsType extends SearchType {
 
             return true;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("(oslib.linux.CommandExistsType) cmd=" + cmd + " > " + ex.getMessage());
         }
 
         return false;
