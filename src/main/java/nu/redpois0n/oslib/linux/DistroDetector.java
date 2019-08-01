@@ -27,9 +27,19 @@ public class DistroDetector {
 
             // to detect older versions of centos (as centos 6), which don't have /etc/os-release
             List<String> lines = Utils.readFile(new File("/etc/centos-release"));
-            if (lines != null && lines.size() > 0) {
+            if (lines != null && lines.size() > 0 && distro == null) {
                 String content = lines.get(0);
                 distro = Distro.CENTOS;
+                release = content.replaceAll("[^0-9.]", "");
+            }
+
+            // to detect redhat, and have higher say over /etc/redhat-release
+            // note that this check is after centos-release as centos also has this file
+            // so distro==null check helps avoid it
+            lines = Utils.readFile(new File("/etc/redhat-release"));
+            if (lines != null && lines.size() > 0 && distro == null) {
+                String content = lines.get(0);
+                distro = Distro.REDHAT_ENTERPRISE;
                 release = content.replaceAll("[^0-9.]", "");
             }
 
