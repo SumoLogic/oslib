@@ -26,12 +26,11 @@ public class DistroDetector {
             Map<String, String> lsbreleaseMap = Utils.mapFile(new File("/etc/lsb-release"), "=");
 
             // to detect older versions of centos (as centos 6), which don't have /etc/os-release
-            // CentOS Linux 6.10 (Final)
             List<String> lines = Utils.readFile(new File("/etc/centos-release"));
             if (lines != null && lines.size() > 0) {
                 String content = lines.get(0);
                 distro = Distro.CENTOS;
-                release = content.split(" ")[2];
+                release = content.replaceAll("[^0-9.]", "");
             }
 
             boolean b = false;
