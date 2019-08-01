@@ -17,13 +17,19 @@ public enum WindowsVersion implements VersionCompare {
     WIN10("Windows 10");
 
     private final String search;
+    private final String version;
 
     WindowsVersion(String search) {
         this.search = search;
+        this.version = System.getProperty("os.version");
     }
 
     public String getSearch() {
         return search;
+    }
+
+    public String getVersion() {
+        return version;
     }
 
     /**
