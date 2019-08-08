@@ -41,8 +41,9 @@ public class WindowsOperatingSystem extends AbstractOperatingSystem implements S
     public String getDisplayString() {
         String s = version.getSearch();
         if (version.getVersion() != null) {
-            s += version.getVersion();
+            s += " " + version.getVersion();
         }
+        s = s.trim();
         return s;
     }
 
