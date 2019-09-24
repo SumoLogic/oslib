@@ -55,7 +55,7 @@
 
     <groupId>nu.redpois0n</groupId>
     <artifactId>oslib</artifactId>
-    <version>1.0-sumo-3</version>
+    <version>1.0-sumo-4</version>
     <packaging>jar</packaging>
 
     <properties>
