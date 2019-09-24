@@ -18,7 +18,8 @@ public enum MacOSVersion implements VersionCompare {
     EL_CAPITAN("El Capitan", "10.11", true),
     SIERRA("Sierra", "10.12"),
     HIGH_SIERRA("High Sierra", "10.13", true),
-    MOJAVE("Mojave", "10.14", true);
+    MOJAVE("Mojave", "10.14", true),
+    CATALINA("Catalina", "10.15", true);
 
     private final String search;
     private final String version;
